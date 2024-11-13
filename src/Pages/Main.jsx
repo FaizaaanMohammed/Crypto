@@ -14,11 +14,10 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../Helper/Api/Axios";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
-import { ContactSupport } from "@mui/icons-material";
-import { logDOM } from "@testing-library/react";
+
 
 const Main = () => {
-  const { isLoading, isError, data, error,refetch } = useQuery({
+  const {  data, refetch } = useQuery({
     queryKey: "key",
     queryFn: axiosInstance,
   });
@@ -26,14 +25,7 @@ const Main = () => {
   const [search, setSearch] = useState("");
   //   console.log('search',search);
   const [price, setPrice] = useState("");
-  const [name,setName] = useState("")
-
-  const handleClick = () => {
-    const namesort =  data?.data?.data?.name?.sort((item)=>{
-        return item
-     });
-     console.log(namesort,'name');
-  };
+ 
 
 
   
@@ -50,11 +42,9 @@ const Main = () => {
     setName()
   },[])
 
-  const pricee = price !== "" && price !== undefined;
+ 
 
- const onRefreshClick =()=>{
-   
- }
+ 
   
   return (
     <>
