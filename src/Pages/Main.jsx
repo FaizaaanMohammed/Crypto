@@ -23,9 +23,8 @@ const Main = () => {
   //   console.log("data", data?.data?.data);
   const [search, setSearch] = useState("");
   //   console.log('search',search);
-  const [price, setPrice] = useState("");
-  const [name, setName] = useState("");
-
+  const [setPrice] = useState("");
+ 
   const handleClickPrice = () => {
     // console.log('clicked');
     const storedata = data?.data?.data?.sort((a, b) => {
