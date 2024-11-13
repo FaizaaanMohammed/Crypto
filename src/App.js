@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Main from './Pages/Main';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

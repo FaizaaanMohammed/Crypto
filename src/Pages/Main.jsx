@@ -11,31 +11,32 @@ import {
   TableRow,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { axiosInstance } from "../Helper/Api/Axios";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 
+
 const Main = () => {
-  const { data, refetch } = useQuery({
-    queryKey: "key",
+  const {  data,refetch } = useQuery({
+    queryKey: ["key"],
     queryFn: axiosInstance,
   });
   //   console.log("data", data?.data?.data);
   const [search, setSearch] = useState("");
   //   console.log('search',search);
-  const [setPrice] = useState("");
+  const [price, setPrice] = useState('');
  
   const handleClickPrice = () => {
     // console.log('clicked');
     const storedata = data?.data?.data?.sort((a, b) => {
-      return a.priceUsd - b.priceUsd;
+      return a.priceUsd-b.priceUsd
     });
-    setPrice(storedata);
+     setPrice(storedata)
   };
-  useEffect(() => {
-    setPrice();
-  }, []);
+  
 
+ 
+  
   return (
     <>
       <Container maxWidth="xl">
@@ -66,16 +67,8 @@ const Main = () => {
                   }}
                 />
               </h1>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  margin: "10px 0px",
-                }}
-              >
-                <Button variant="contained" onClick={refetch}>
-                  Refresh Me
-                </Button>
+              <Box sx={{display:"flex",justifyContent:"center",margin:"10px 0px"}}>
+                <Button variant="contained" onClick={refetch}>Refresh Me</Button>
               </Box>
             </Box>
           </Grid>
@@ -92,6 +85,7 @@ const Main = () => {
                       </TableCell>
                       <TableCell>
                         <b>NAME</b>
+                       
                       </TableCell>
                       <TableCell>
                         <b>ID</b>
@@ -101,25 +95,26 @@ const Main = () => {
                       </TableCell>
                       <TableCell>
                         <b>PRICE</b>
-                        <SwapVertIcon
-                          onClick={handleClickPrice}
-                          sx={{ cursor: "pointer" }}
-                        />
+                        <SwapVertIcon onClick={handleClickPrice} sx={{cursor:"pointer"}} />
                       </TableCell>
                       <TableCell>
-                        <b>MARKETCAP</b>
+                        <b>
+                          MARKETCAP 
+                        </b>
                       </TableCell>
+                     
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data?.data?.data
-                      .filter((item) => {
+                    {(price || data?.data?.data)?.filter((item) =>{
                         if (search === "") {
                           return item;
-                        } else if (
-                          item.name.toLowerCase().includes(search.toLowerCase())
-                        ) {
-                          return item;
+                        } 
+                        else if (item.name.toLowerCase().includes(search.toLowerCase())){
+                          return item
+                        }
+                        else{
+                          return item
                         }
                       })
                       .map((row) => (
@@ -133,12 +128,13 @@ const Main = () => {
                           <TableCell>{row.id}</TableCell>
                           <TableCell>{row.symbol}</TableCell>
                           <TableCell>
-                            {`${row.priceUsd.slice(0, 7)} $`}
+                          {`${row.priceUsd.slice(0, 7)} $`}
                           </TableCell>
                           <TableCell>{`${row.marketCapUsd.slice(
                             0,
                             15
                           )} $`}</TableCell>
+                         
                         </TableRow>
                       ))}
                   </TableBody>
