@@ -108,14 +108,12 @@ const Main = () => {
                   <TableBody>
                     {(price || data?.data?.data)?.filter((item) =>{
                         if (search === "") {
-                          return item;
+                          return true;
                         } 
                         else if (item.name.toLowerCase().includes(search.toLowerCase())){
-                          return item
+                          return true
                         }
-                        else{
-                          return item
-                        }
+                        return false
                       })
                       .map((row) => (
                         <TableRow
