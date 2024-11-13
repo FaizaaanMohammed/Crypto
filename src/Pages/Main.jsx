@@ -15,9 +15,8 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../Helper/Api/Axios";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 
-
 const Main = () => {
-  const {  data, refetch } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: "key",
     queryFn: axiosInstance,
   });
@@ -25,27 +24,19 @@ const Main = () => {
   const [search, setSearch] = useState("");
   //   console.log('search',search);
   const [price, setPrice] = useState("");
- 
-
-
-  
+  const [name, setName] = useState("");
 
   const handleClickPrice = () => {
     // console.log('clicked');
     const storedata = data?.data?.data?.sort((a, b) => {
-      return a.priceUsd-b.priceUsd
+      return a.priceUsd - b.priceUsd;
     });
-     setPrice(storedata)
+    setPrice(storedata);
   };
-  useEffect(()=>{
-    setPrice()
-    setName()
-  },[])
+  useEffect(() => {
+    setPrice();
+  }, []);
 
- 
-
- 
-  
   return (
     <>
       <Container maxWidth="xl">
@@ -76,8 +67,16 @@ const Main = () => {
                   }}
                 />
               </h1>
-              <Box sx={{display:"flex",justifyContent:"center",margin:"10px 0px"}}>
-                <Button variant="contained" onClick={refetch}>Refresh Me</Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "10px 0px",
+                }}
+              >
+                <Button variant="contained" onClick={refetch}>
+                  Refresh Me
+                </Button>
               </Box>
             </Box>
           </Grid>
@@ -94,7 +93,6 @@ const Main = () => {
                       </TableCell>
                       <TableCell>
                         <b>NAME</b>
-                       
                       </TableCell>
                       <TableCell>
                         <b>ID</b>
@@ -104,14 +102,14 @@ const Main = () => {
                       </TableCell>
                       <TableCell>
                         <b>PRICE</b>
-                        <SwapVertIcon onClick={handleClickPrice} sx={{cursor:"pointer"}} />
+                        <SwapVertIcon
+                          onClick={handleClickPrice}
+                          sx={{ cursor: "pointer" }}
+                        />
                       </TableCell>
                       <TableCell>
-                        <b>
-                          MARKETCAP 
-                        </b>
+                        <b>MARKETCAP</b>
                       </TableCell>
-                     
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -136,13 +134,12 @@ const Main = () => {
                           <TableCell>{row.id}</TableCell>
                           <TableCell>{row.symbol}</TableCell>
                           <TableCell>
-                          {`${row.priceUsd.slice(0, 7)} $`}
+                            {`${row.priceUsd.slice(0, 7)} $`}
                           </TableCell>
                           <TableCell>{`${row.marketCapUsd.slice(
                             0,
                             15
                           )} $`}</TableCell>
-                         
                         </TableRow>
                       ))}
                   </TableBody>
